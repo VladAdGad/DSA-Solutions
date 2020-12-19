@@ -1,0 +1,46 @@
+---
+stages:
+  - Lint
+  - Environment
+  - Build
+  - Quality Gates
+
+variables:
+  LEETCODE_ENV_IMAGE: "${CI_REGISTRY_IMAGE}/leetcode-env"
+
+prepare-env:
+  stage: Environment
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - apk update
+    - echo "${CI_REGISTRY_PASSWORD}" | docker login --username "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
+  script:
+    - docker pull "${LEETCODE_ENV_IMAGE}" || true
+    - docker build --tag ${LEETCODE_ENV_IMAGE} .
+    - docker push "${LEETCODE_ENV_IMAGE}"
+  interruptible: true
+  
+build:
+  stage: Build
+  image: ${LEETCODE_ENV_IMAGE}
+  script:
+    - mkdir build
+    - conan install --install-folder=build --build=missing .
+    - cmake -B build -G Ninja
+    - ninja -C build
+  artifacts:
+    paths:
+      - ./build/bin/LeetCode
+  interruptible: true
+
+test:
+  stage: Quality Gates
+  image: ${LEETCODE_ENV_IMAGE}
+  script:
+    - ./build/bin/LeetCode
+  interruptible: true
