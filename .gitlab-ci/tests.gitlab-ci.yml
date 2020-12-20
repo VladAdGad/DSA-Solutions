@@ -1,0 +1,10 @@
+tests:
+  stage: tests
+  image: ${CI_REGISTRY_IMAGE}
+  script:
+    - build/bin/leetcode-solutions --reporter junit > tests_report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: tests_report.xml
+  interruptible: true
