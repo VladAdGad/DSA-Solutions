@@ -2,8 +2,8 @@ build:
   stage: build
   image: ${CI_REGISTRY_IMAGE}
   script:
-    - environment/scripts/clean_build_project.sh
+    - environment/clean_build_project.sh
   artifacts:
     paths:
-      - build/bin/leetcode-solutions
+      - build/bin/leetcode-solutions-tests
   interruptible: true
