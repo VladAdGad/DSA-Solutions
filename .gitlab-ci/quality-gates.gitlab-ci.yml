@@ -6,15 +6,13 @@
 clang-tidy:
   <<: *lint_definition
   script:
-    - environment/scripts/clean_build_project.sh
-    - environment/scripts/setup_compile_commands_database.sh
-    - environment/scripts/clean_compile_commands_database.sh
+    - environment/clean_build_project.sh
     - run-clang-tidy -p=build
 
 clang-format:
   <<: *lint_definition
   script:
-    - find . -name '*.hpp' -or -name '*.cpp' | xargs clang-format --dry-run
+    - find . -name '*.hpp' -or -name '*.cpp' | xargs clang-format --dry-run --verbose
 
 cppcheck:
   <<: *lint_definition
@@ -24,4 +22,4 @@ cppcheck:
 valgrind:
   <<: *lint_definition
   script:
-    - valgrind --leak-check=yes build/bin/leetcode-solutions
+    - valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./build/bin/leetcode-solutions-tests

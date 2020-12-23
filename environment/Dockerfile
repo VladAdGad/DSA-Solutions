@@ -11,8 +11,6 @@ RUN apt-get install --yes \
     clang-tidy \
     clang-format \
     cppcheck \
-    jq \
-    moreutils \
     valgrind
 
 COPY requirements.txt .

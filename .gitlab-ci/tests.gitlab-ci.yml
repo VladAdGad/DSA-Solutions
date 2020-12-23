@@ -2,7 +2,7 @@ tests:
   stage: tests
   image: ${CI_REGISTRY_IMAGE}
   script:
-    - build/bin/leetcode-solutions --reporter junit > tests_report.xml
+    - build/bin/leetcode-solutions-tests --reporter=junit --out=tests_report.xml
   artifacts:
     when: always
     reports:

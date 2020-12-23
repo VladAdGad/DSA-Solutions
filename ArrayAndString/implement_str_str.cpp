@@ -3,35 +3,35 @@
 using namespace std;
 
 int strStr(string haystack, string needle) {
-    int hSize = haystack.size();
-    int nSize = needle.size();
+	int hSize = haystack.size();
+	int nSize = needle.size();
 
-    if (needle.empty()) {
-        return 0;
-    }
+	if (needle.empty()) {
+		return 0;
+	}
 
-    if (nSize > hSize) {
-        return -1;
-    }
+	if (nSize > hSize) {
+		return -1;
+	}
 
-    for (int i = 0; i <= hSize - nSize; ++i) {
-        if (haystack[i] == needle[0]) {
-            int j = i + 1;
-            int n = 1;
-            while (j < hSize && haystack[j] == needle[n]) {
-                j++;
-                n++;
-            }
-            if (n == nSize) {
-                return i;
-            }
-        }
-    }
+	for (int i = 0; i <= hSize - nSize; ++i) {
+		if (haystack[i] == needle[0]) {
+			int j = i + 1;
+			int n = 1;
+			while (j < hSize && haystack[j] == needle[n]) {
+				j++;
+				n++;
+			}
+			if (n == nSize) {
+				return i;
+			}
+		}
+	}
 
-    return -1;
+	return -1;
 }
 
-//int main() {
+// int main() {
 //    string haystack1 = "hello";
 //    string needle1 = "ll";
 //
