@@ -1,7 +1,9 @@
+#include <memory>
+
 class DoublyListNode {
 public:
 	int value;
-	DoublyListNode *next, *prev;
+	std::shared_ptr<DoublyListNode> prev, next;
 
 	explicit DoublyListNode(int value) {
 		this->value = value;
@@ -12,14 +14,12 @@ public:
 
 class DoublyLinkedList {
 public:
-	DoublyListNode* head;
-	DoublyListNode* tail;
-	int size;
+	int size{0};
+	std::shared_ptr<DoublyListNode> head, tail;
 
 	DoublyLinkedList() {
 		head = nullptr;
 		tail = nullptr;
-		size = 0;
 	}
 
 	/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
@@ -28,7 +28,7 @@ public:
 			return -1;
 		}
 
-		DoublyListNode* current = nullptr;
+		std::shared_ptr<DoublyListNode> current;
 		if (index < size / 2) {
 			current = head;
 			for (; index > 0; --index) {
@@ -47,7 +47,7 @@ public:
 	/** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the
 	 * first node of the linked list. */
 	auto addAtHead(int val) -> bool {
-		auto* new_head = new DoublyListNode(val);
+		auto new_head = std::make_shared<DoublyListNode>(val);
 
 		if (size == 0) {
 			head = new_head;
@@ -64,7 +64,7 @@ public:
 
 	/** Append a node of value val to the last element of the linked list. */
 	auto addAtTail(int val) -> bool {
-		auto* new_tail = new DoublyListNode(val);
+		auto new_tail = std::make_shared<DoublyListNode>(val);
 
 		if (size == 0) {
 			tail = new_tail;
@@ -95,7 +95,7 @@ public:
 			return addAtHead(val);
 		}
 
-		DoublyListNode* current = nullptr;
+		std::shared_ptr<DoublyListNode> current = nullptr;
 		if (index < size / 2) {
 			current = head;
 			for (; index > 0; --index) {
@@ -108,7 +108,7 @@ public:
 			}
 		}
 
-		auto* new_node = new DoublyListNode(val);
+		auto new_node = std::make_shared<DoublyListNode>(val);
 		new_node->next = current;
 		new_node->prev = current->prev;
 		current->prev->next = new_node;
@@ -138,7 +138,7 @@ public:
 			return true;
 		}
 
-		DoublyListNode* current = nullptr;
+		std::shared_ptr<DoublyListNode> current = nullptr;
 		if (index < size / 2) {
 			current = head;
 			for (; index > 0; --index) {

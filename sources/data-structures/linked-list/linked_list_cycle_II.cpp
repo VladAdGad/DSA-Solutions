@@ -1,14 +1,15 @@
 #include "singly_list_node.cpp"
 
-auto detectCycle(SinglyListNode* head) -> SinglyListNode* {
-	SinglyListNode *walker = head, *runner = head;
+auto detectCycle(const std::shared_ptr<SinglyListNode>& head) -> std::shared_ptr<SinglyListNode> {
+	auto walker = head;
+	auto runner = head;
 
 	while (runner != nullptr && runner->next != nullptr) {
 		runner = runner->next->next;
 		walker = walker->next;
 
 		if (runner == walker) {
-			SinglyListNode* seeker = head;
+			auto seeker = head;
 
 			while (seeker != walker) {
 				walker = walker->next;

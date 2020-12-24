@@ -1,12 +1,12 @@
 #include "singly_list_node.cpp"
 
-auto hasCycle(SinglyListNode* head) -> bool {
+auto hasCycle(const std::shared_ptr<SinglyListNode>& head) -> bool {
 	if (head == nullptr) {
 		return false;
 	}
 
-	SinglyListNode* slow = head;
-	SinglyListNode* fast = head->next;
+	auto slow = head;
+	auto fast = head->next;
 	while (slow != fast) {
 		if (fast == nullptr || fast->next == nullptr) {
 			return false;

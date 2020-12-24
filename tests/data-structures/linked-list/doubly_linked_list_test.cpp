@@ -3,23 +3,21 @@
 #include <catch2/catch.hpp>
 
 TEST_CASE("Doubly Linked List", "[Data Structures]") {
-	DoublyLinkedList* linked_ist = nullptr;
-
 	SECTION("get using empty linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		REQUIRE(linked_ist->size == 0);
 		REQUIRE(linked_ist->get(0) == -1);
 	}
 
 	SECTION("get using index which is higher than size of linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE(linked_ist->get(1) == -1);
 	}
 
 	SECTION("get last element") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -28,7 +26,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("get first element") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -37,7 +35,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("get middle element") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -46,7 +44,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtHead with empty linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(7);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE(linked_ist->get(0) == 7);
@@ -54,7 +52,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtHead multiple times") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		REQUIRE(linked_ist->size == 2);
@@ -66,7 +64,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtTail with empty linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtTail(0);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE(linked_ist->get(0) == 0);
@@ -74,7 +72,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtTail multiple times") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtTail(0);
 		linked_ist->addAtTail(1);
 		REQUIRE(linked_ist->size == 2);
@@ -86,7 +84,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtIndex using index which is higher than size of linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE_FALSE(linked_ist->addAtIndex(2, 1));
@@ -94,7 +92,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtIndex using index as same as size of linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE(linked_ist->addAtIndex(1, 1));
@@ -103,7 +101,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtIndex using index zero (first element) with empty linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		REQUIRE(linked_ist->size == 0);
 		REQUIRE(linked_ist->addAtIndex(0, 0));
 		REQUIRE(linked_ist->size == 1);
@@ -111,7 +109,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtIndex using index zero (first element)") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE(linked_ist->addAtIndex(0, 1));
@@ -121,7 +119,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtIndex where index is less as twice then size") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -134,7 +132,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtIndex where index is more as size divided twice") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -147,7 +145,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("addAtIndex where index is on the middle") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -160,14 +158,14 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("deleteAtIndex when list is empty") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		REQUIRE(linked_ist->size == 0);
 		REQUIRE_FALSE(linked_ist->deleteAtIndex(7));
 		REQUIRE(linked_ist->size == 0);
 	}
 
 	SECTION("deleteAtIndex using index which is higher than size of linked list") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE_FALSE(linked_ist->deleteAtIndex(1));
@@ -175,7 +173,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("deleteAtIndex using index which points to the head (zero)") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		REQUIRE(linked_ist->size == 1);
 		REQUIRE(linked_ist->deleteAtIndex(0));
@@ -184,7 +182,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("deleteAtIndex using index which points to the tail") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtTail(1);
 		REQUIRE(linked_ist->size == 2);
@@ -194,7 +192,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("deleteAtIndex where index is less as twice then size") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -207,7 +205,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("deleteAtIndex where index is more as size divided twice") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
@@ -220,7 +218,7 @@ TEST_CASE("Doubly Linked List", "[Data Structures]") {
 	}
 
 	SECTION("deleteAtIndex where index is on the middle") {
-		linked_ist = new DoublyLinkedList();
+		auto linked_ist = std::make_unique<DoublyLinkedList>();
 		linked_ist->addAtHead(0);
 		linked_ist->addAtHead(1);
 		linked_ist->addAtHead(2);
