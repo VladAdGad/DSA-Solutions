@@ -2,14 +2,12 @@
 
 class SinglyLinkedList {
 public:
-	SinglyListNode* head;
-	SinglyListNode* tail;
-	int size;
+	std::shared_ptr<SinglyListNode> head, tail;
+	int size{0};
 
 	SinglyLinkedList() {
 		head = nullptr;
 		tail = nullptr;
-		size = 0;
 	}
 
 	/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
@@ -19,7 +17,7 @@ public:
 		}
 
 		int count = 0;
-		for (SinglyListNode* cur = head; count != index + 1; cur = cur->next, ++count) {
+		for (auto cur = head; count != index + 1; cur = cur->next, ++count) {
 			if (count == index) {
 				return cur->value;
 			}
@@ -31,7 +29,7 @@ public:
 	/** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the
 	 * first node of the linked list. */
 	auto addAtHead(int val) -> bool {
-		auto* new_node = new SinglyListNode(val);
+		auto new_node = std::make_shared<SinglyListNode>(val);
 
 		new_node->next = head;
 		head = new_node;
@@ -45,7 +43,7 @@ public:
 
 	/** Append a node of value val to the last element of the linked list. */
 	auto addAtTail(int val) -> bool {
-		auto* new_node = new SinglyListNode(val);
+		auto new_node = std::make_shared<SinglyListNode>(val);
 
 		if (size == 0) {
 			tail = new_node;
@@ -76,9 +74,9 @@ public:
 		}
 
 		int count = 0;
-		for (SinglyListNode* cur = head; count != index + 1; cur = cur->next, ++count) {
+		for (auto cur = head; count != index + 1; cur = cur->next, ++count) {
 			if (count == index - 1) {
-				auto* new_node = new SinglyListNode(val);
+				auto new_node = std::make_shared<SinglyListNode>(val);
 				new_node->next = cur->next;
 				cur->next = new_node;
 				size++;
@@ -102,7 +100,7 @@ public:
 		}
 
 		int count = 0;
-		for (SinglyListNode* cur = head; count != index + 1; cur = cur->next, ++count) {
+		for (auto cur = head; count != index + 1; cur = cur->next, ++count) {
 			if (count == index - 1) {
 				cur->next = cur->next->next;
 				if (index == size - 1) {
