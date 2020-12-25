@@ -4,7 +4,7 @@
 
 TEST_CASE("Min Stack", "[Data Structures]") {
 	SECTION("1") {
-    auto min_stack = std::make_unique<MinStack>();
+		auto min_stack = std::make_unique<MinStack>();
 		min_stack->push(-2);
 		min_stack->push(0);
 		min_stack->push(-3);

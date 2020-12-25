@@ -2,14 +2,12 @@
 
 class SinglyLinkedList {
 public:
-	std::shared_ptr<SinglyListNode> head;
-  std::shared_ptr<SinglyListNode> tail;
-	int size;
+	std::shared_ptr<SinglyListNode> head, tail;
+	int size{0};
 
 	SinglyLinkedList() {
 		head = nullptr;
 		tail = nullptr;
-		size = 0;
 	}
 
 	/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
@@ -45,7 +43,7 @@ public:
 
 	/** Append a node of value val to the last element of the linked list. */
 	auto addAtTail(int val) -> bool {
-    auto new_node = std::make_shared<SinglyListNode>(val);
+		auto new_node = std::make_shared<SinglyListNode>(val);
 
 		if (size == 0) {
 			tail = new_node;
@@ -78,7 +76,7 @@ public:
 		int count = 0;
 		for (auto cur = head; count != index + 1; cur = cur->next, ++count) {
 			if (count == index - 1) {
-        auto new_node = std::make_shared<SinglyListNode>(val);
+				auto new_node = std::make_shared<SinglyListNode>(val);
 				new_node->next = cur->next;
 				cur->next = new_node;
 				size++;
