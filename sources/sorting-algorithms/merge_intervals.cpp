@@ -1,6 +1,6 @@
 #include <vector>
 
-std::vector<std::vector<int>> merge(std::vector<std::vector<int>>& intervals) {
+auto merge(std::vector<std::vector<int>>& intervals) -> std::vector<std::vector<int>> {
 	std::sort(intervals.begin(), intervals.end(), [](const auto& i1, const auto& i2) {
 		return i1[0] > i2[0];
 	});
