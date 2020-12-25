@@ -11,4 +11,5 @@ target_include_directories(${PROJECT_LIBRARY_SOURCE}
 													 data-structures/stack
 													 search-algorithms
 													 search-algorithms/binary-search
-													 search-algorithms/linear-search)
+													 search-algorithms/linear-search
+													 sorting-algorithms)
