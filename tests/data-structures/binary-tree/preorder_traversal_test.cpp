@@ -13,5 +13,8 @@ TEST_CASE("Preorder Traversal", "[Data Structures]") {
 	root->right->right = std::make_shared<TreeNode>(7);
 	root->right->right->left = std::make_shared<TreeNode>(8);
 
-	REQUIRE_THAT(preorderTraversal(root), Catch::Matchers::Equals(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8}));
+  Solution1 s1;
+  Solution2 s2;
+	REQUIRE_THAT(s1.preorderTraversal(root), Catch::Matchers::Equals(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8}));
+	REQUIRE_THAT(s2.preorderTraversal(root), Catch::Matchers::Equals(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8}));
 }
