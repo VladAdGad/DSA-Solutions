@@ -26,7 +26,7 @@ TEST_CASE("Preorder Traversal", "[data structures][binary tree]") {
 	REQUIRE(root->right->right->val == 7);
 	REQUIRE(root->right->right->left->val == 8);
 
-	const std::vector<int> expected{1, 2, 3, 4, 5, 6, 7, 8};
+	const std::vector<int> expected{0, 1, 2, 3, 4, 5, 6, 7, 8};
 	SECTION("recursive preorder traversal") {
 		REQUIRE_THAT(solution1->preorderTraversal(root), Catch::Matchers::Equals(expected));
 	}
