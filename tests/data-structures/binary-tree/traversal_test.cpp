@@ -1,11 +1,9 @@
+#include "inorder_traversal.cpp"
 #include "preorder_traversal.cpp"
 
 #include <catch2/catch.hpp>
 
-TEST_CASE("Preorder Traversal", "[data structures][binary tree]") {
-	auto solution1 = std::make_unique<Solution1>();
-	auto solution2 = std::make_unique<Solution2>();
-
+TEST_CASE("Traversal", "[data structures][binary tree]") {
 	auto root = std::make_shared<TreeNode>(0);
 	root->left = std::make_shared<TreeNode>(1);
 	root->left->left = std::make_shared<TreeNode>(2);
@@ -26,11 +24,25 @@ TEST_CASE("Preorder Traversal", "[data structures][binary tree]") {
 	REQUIRE(root->right->right->val == 7);
 	REQUIRE(root->right->right->left->val == 8);
 
-	const std::vector<int> expected{0, 1, 2, 3, 4, 5, 6, 7, 8};
-	SECTION("recursive preorder traversal") {
-		REQUIRE_THAT(solution1->preorderTraversal(root), Catch::Matchers::Equals(expected));
+	SECTION("preorder traversal") {
+		const std::vector<int> expected{0, 1, 2, 3, 4, 5, 6, 7, 8};
+
+		SECTION("recursive preorder traversal") {
+			REQUIRE_THAT(recursivePreorderTraversal(root), Catch::Matchers::Equals(expected));
+		}
+		SECTION("iterative preorder traversal") {
+			REQUIRE_THAT(iterativePreorderTraversal(root), Catch::Matchers::Equals(expected));
+		}
 	}
-	SECTION("iterative Preorder Traversal") {
-		REQUIRE_THAT(solution2->preorderTraversal(root), Catch::Matchers::Equals(expected));
+
+	SECTION("inorder traversal") {
+		const std::vector<int> expected{2, 1, 4, 3, 5, 0, 6, 8, 7};
+
+		SECTION("recursive preorder traversal") {
+			REQUIRE_THAT(recursiveInorderTraversal(root), Catch::Matchers::Equals(expected));
+		}
+		SECTION("iterative preorder traversal") {
+			REQUIRE_THAT(iterativeInorderTraversal(root), Catch::Matchers::Equals(expected));
+		}
 	}
 }
