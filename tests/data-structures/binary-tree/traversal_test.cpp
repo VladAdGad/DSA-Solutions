@@ -1,4 +1,5 @@
 #include "inorder_traversal.cpp"
+#include "postorder_traversal.cpp"
 #include "preorder_traversal.cpp"
 
 #include <catch2/catch.hpp>
@@ -38,11 +39,22 @@ TEST_CASE("Traversal", "[data structures][binary tree]") {
 	SECTION("inorder traversal") {
 		const std::vector<int> expected{2, 1, 4, 3, 5, 0, 6, 8, 7};
 
-		SECTION("recursive preorder traversal") {
+		SECTION("recursive inorder traversal") {
 			REQUIRE_THAT(recursiveInorderTraversal(root), Catch::Matchers::Equals(expected));
 		}
-		SECTION("iterative preorder traversal") {
+		SECTION("iterative inorder traversal") {
 			REQUIRE_THAT(iterativeInorderTraversal(root), Catch::Matchers::Equals(expected));
+		}
+	}
+
+	SECTION("postorder traversal") {
+		const std::vector<int> expected{2, 4, 5, 3, 1, 8, 7, 6, 0};
+
+		SECTION("recursive postorder traversal") {
+			REQUIRE_THAT(recursivePostorderTraversal(root), Catch::Matchers::Equals(expected));
+		}
+		SECTION("iterative postorder traversal") {
+			REQUIRE_THAT(iterativePostorderTraversal(root), Catch::Matchers::Equals(expected));
 		}
 	}
 }
