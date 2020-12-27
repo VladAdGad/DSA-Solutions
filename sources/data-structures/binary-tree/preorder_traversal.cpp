@@ -5,16 +5,19 @@
 
 class Solution1 {
 public:
-	std::vector<int> result;
-
 	auto preorderTraversal(const std::shared_ptr<TreeNode>& root) -> std::vector<int> {
+		std::vector<int> result, merge;
 		if (root == nullptr) {
 			return result;
 		}
 
 		result.push_back(root->val);
-		preorderTraversal(root->left);
-		preorderTraversal(root->right);
+
+		merge = preorderTraversal(root->left);
+		result.insert(result.end(), merge.begin(), merge.end());
+
+		merge = preorderTraversal(root->right);
+    result.insert(result.end(), merge.begin(), merge.end());
 
 		return result;
 	}
