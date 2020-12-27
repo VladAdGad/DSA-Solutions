@@ -30,7 +30,7 @@ TEST_CASE("Traversal", "[data structures][binary tree]") {
 		SECTION("recursive preorder traversal") {
 			REQUIRE_THAT(recursivePreorderTraversal(root), Catch::Matchers::Equals(expected));
 		}
-		SECTION("iterative Preorder Traversal") {
+		SECTION("iterative preorder traversal") {
 			REQUIRE_THAT(iterativePreorderTraversal(root), Catch::Matchers::Equals(expected));
 		}
 	}
@@ -41,7 +41,7 @@ TEST_CASE("Traversal", "[data structures][binary tree]") {
 		SECTION("recursive preorder traversal") {
 			REQUIRE_THAT(recursiveInorderTraversal(root), Catch::Matchers::Equals(expected));
 		}
-		SECTION("iterative Preorder Traversal") {
+		SECTION("iterative preorder traversal") {
 			REQUIRE_THAT(iterativeInorderTraversal(root), Catch::Matchers::Equals(expected));
 		}
 	}
