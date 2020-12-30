@@ -1,0 +1,29 @@
+.lint_template: &lint_definition
+  stage: quality gates
+  image: ${CI_REGISTRY_IMAGE}
+  interruptible: true
+
+codacy-clang-tidy:
+  <<: *lint_definition
+  variables:
+    CODACY_URL: https://api.codacy.com
+    CODACY_CLANG_TIDY_VERSION: 1.2.1
+  script:
+    - environment/clean_build_project.sh
+    - wget --continue https://github.com/codacy/codacy-clang-tidy/releases/download/${CODACY_CLANG_TIDY_VERSION}/codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
+    - run-clang-tidy -p=build | ./.gitlab/scripts/codacy_send_results.sh
+
+clang-format:
+  <<: *lint_definition
+  script:
+    - find . -name '*.hpp' -or -name '*.cpp' | xargs clang-format --dry-run --verbose
+
+cppcheck:
+  <<: *lint_definition
+  script:
+    - cppcheck --force --enable=all .
+
+valgrind:
+  <<: *lint_definition
+  script:
+    - valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./build/bin/leetcode-solutions-tests
