@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -eux
+
 ./codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION} |
   curl -XPOST -L -H "project-token: ${CODACY_PROJECT_TOKEN}" \
     -H "Content-type: application/json" -d @- \
