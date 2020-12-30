@@ -6,7 +6,7 @@ stages:
   - tests
 
 include:
-  - local: .gitlab-ci/environment.gitlab-ci.yml
-  - local: .gitlab-ci/build.gitlab-ci.yml
-  - local: .gitlab-ci/quality-gates.gitlab-ci.yml
-  - local: .gitlab-ci/tests.gitlab-ci.yml
+  - local: .gitlab/ci/environment.gitlab-ci.yml
+  - local: .gitlab/ci/build.gitlab-ci.yml
+  - local: .gitlab/ci/quality-gates.gitlab-ci.yml
+  - local: .gitlab/ci/tests.gitlab-ci.yml

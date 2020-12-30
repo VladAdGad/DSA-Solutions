@@ -27,7 +27,9 @@ RUN pip3 install --requirement requirements.txt
 RUN apt-get install --yes ssh
 RUN echo "root:q1W@q1W@" | chpasswd
 RUN sed --in-place "/^#PermitRootLogin prohibit-password/c\PermitRootLogin yes" "/etc/ssh/sshd_config"
+EXPOSE 22
 
 ENTRYPOINT service ssh start && bash
 
-#docker run --detach --cap-add=SYS_PTRACE --publish=2222:22 leetcode-solutions
+#docker build --tag leetcode-solutions .
+#docker run --name leetcode-solutions --tty --detach --publish=2222:22 --restart=always --cap-add=SYS_PTRACE leetcode-solutions
