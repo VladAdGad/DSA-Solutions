@@ -10,6 +10,7 @@ RUN apt-get install --yes \
     clang-format \
     clang-tidy \
     cppcheck \
+    curl \
     g++ \
     gcc \
     gdb \
