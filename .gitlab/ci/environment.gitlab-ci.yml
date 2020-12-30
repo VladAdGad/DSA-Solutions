@@ -12,6 +12,6 @@ prepare-environment:
   script:
     - docker pull "${CI_REGISTRY_IMAGE}" || true
     - cd environment
-    - docker build --tag=${CI_REGISTRY_IMAGE} .
+    - docker build --tag=${CI_REGISTRY_IMAGE} --cache-from=${CI_REGISTRY_IMAGE} .
     - docker push "${CI_REGISTRY_IMAGE}"
   interruptible: true
