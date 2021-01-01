@@ -4,6 +4,7 @@ build:
   script:
     - environment/clean_build_project.sh
   artifacts:
+    name: leetcode-solutions-tests
     paths:
       - build/bin/leetcode-solutions-tests
   interruptible: true

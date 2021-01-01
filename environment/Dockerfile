@@ -30,7 +30,7 @@ RUN apt-get install --yes ccache &&\
 ENV PATH "/usr/lib/ccache:${PATH}"
 
 RUN LCOV_VERSION=1.15 &&\
-    wget --continue https://github.com/linux-test-project/lcov/archive/v${LCOV_VERSION}.tar.gz -O - | tar --extract --ungzip &&\
+    wget --continue https://github.com/linux-test-project/lcov/archive/v${LCOV_VERSION}.tar.gz --output-document - | tar --extract --ungzip &&\
     pushd lcov-${LCOV_VERSION} &&\
     make install &&\
     popd &&\

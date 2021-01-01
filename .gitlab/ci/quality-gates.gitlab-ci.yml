@@ -8,22 +8,28 @@ clang-tidy:
   variables:
     CODACY_URL: https://api.codacy.com
     CODACY_CLANG_TIDY_VERSION: 1.2.1
-  script:
+  before_script:
     - environment/clean_build_project.sh
     - wget --continue https://github.com/codacy/codacy-clang-tidy/releases/download/${CODACY_CLANG_TIDY_VERSION}/codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
     - chmod +x codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
+  script:
     - run-clang-tidy -p=build | ./.gitlab/scripts/codacy_send_results.sh
 
 lcov:
   <<: *lint_definition
-  script:
+  before_script:
     - export CXXFLAGS="-g -O0 --coverage"
     - environment/clean_build_project.sh
-    - build/bin/leetcode-solutions
-    - lcov --capture --directory build --output-file coverage.info
+    - build/bin/leetcode-solutions-tests
+  script:
+    - lcov --capture --directory build --output-file ${CI_JOB_NAME}.info
   after_script:
-    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report --coverage-reports coverage.info
-    - genhtml coverage.info --output-directory out
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report --coverage-reports ${CI_JOB_NAME}.info
+    - genhtml coverage.info --output-directory ${CI_JOB_NAME}-output
+  artifacts:
+    name: ${CI_JOB_NAME}
+    paths:
+      - ${CI_JOB_NAME}-output
 
 clang-format:
   <<: *lint_definition
