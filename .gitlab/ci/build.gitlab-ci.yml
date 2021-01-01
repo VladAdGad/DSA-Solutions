@@ -5,6 +5,7 @@ build:
     - ccache --set-config=cache_dir=$(pwd)/.ccache
   script:
     - environment/clean_build_project.sh
+    - ls -la build
   artifacts:
     name: leetcode-solutions-tests
     paths:

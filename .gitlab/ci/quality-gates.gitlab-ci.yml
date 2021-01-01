@@ -12,6 +12,7 @@ clang-tidy:
     - wget --continue https://github.com/codacy/codacy-clang-tidy/releases/download/${CODACY_CLANG_TIDY_VERSION}/codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
     - chmod +x codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
   script:
+    - ls -la build
     - run-clang-tidy -p=build | ./.gitlab/scripts/codacy_send_results.sh
   dependencies: [ ]
 
