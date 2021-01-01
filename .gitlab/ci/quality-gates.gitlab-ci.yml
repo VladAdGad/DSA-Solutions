@@ -12,8 +12,12 @@ clang-tidy:
     - wget --continue https://github.com/codacy/codacy-clang-tidy/releases/download/${CODACY_CLANG_TIDY_VERSION}/codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
     - chmod +x codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
   script:
-    - ls -la build
     - run-clang-tidy -p=build | ./.gitlab/scripts/codacy_send_results.sh
+
+clang-format:
+  <<: *lint_definition
+  script:
+    - find . -name '*.cpp' | xargs clang-format --dry-run --verbose
   dependencies: [ ]
 
 lcov:
@@ -31,12 +35,6 @@ lcov:
     name: ${CI_JOB_NAME}
     paths:
       - ${CI_JOB_NAME}-output
-  dependencies: [ ]
-
-clang-format:
-  <<: *lint_definition
-  script:
-    - find . -name '*.cpp' | xargs clang-format --dry-run --verbose
   dependencies: [ ]
 
 valgrind:
