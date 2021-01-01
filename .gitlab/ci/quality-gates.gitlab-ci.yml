@@ -22,10 +22,10 @@ lcov:
     - environment/clean_build_project.sh
     - build/bin/leetcode-solutions-tests
   script:
-    - lcov --capture --directory build --output-file ${CI_JOB_NAME}.info
+    - lcov --no-external --capture --directory . --output-file ${CI_JOB_NAME}.info
   after_script:
     - bash <(curl -Ls https://coverage.codacy.com/get.sh) report --coverage-reports ${CI_JOB_NAME}.info
-    - genhtml coverage.info --output-directory ${CI_JOB_NAME}-output
+    - genhtml ${CI_JOB_NAME}.info --output-directory ${CI_JOB_NAME}-output
   artifacts:
     name: ${CI_JOB_NAME}
     paths:
