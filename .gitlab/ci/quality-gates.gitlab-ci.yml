@@ -16,7 +16,7 @@ clang-tidy:
 
 lcov:
   <<: *lint_definition
-  scripts:
+  script:
     - export CXXFLAGS="-g -O0 --coverage"
     - environment/clean_build_project.sh
     - build/bin/leetcode-solutions
