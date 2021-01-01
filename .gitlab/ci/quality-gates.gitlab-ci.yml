@@ -33,8 +33,7 @@ lcov:
     - genhtml ${CI_JOB_NAME}.info --output-directory ${CI_JOB_NAME}-output
   artifacts:
     name: ${CI_JOB_NAME}
-    paths:
-    - ${CI_JOB_NAME}-output
+    paths: [ ${ CI_JOB_NAME }-output ]
 
 valgrind:
   stage: quality gates

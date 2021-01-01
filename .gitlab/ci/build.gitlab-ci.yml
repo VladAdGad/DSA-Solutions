@@ -5,5 +5,4 @@ build:
     - environment/clean_build_project.sh
   artifacts:
     name: leetcode-solutions-tests
-    paths:
-      - build/bin/leetcode-solutions-tests
+    paths: [ build/bin/leetcode-solutions-tests ]
