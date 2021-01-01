@@ -21,7 +21,7 @@ lcov:
     - environment/clean_build_project.sh
     - build/bin/leetcode-solutions
     - lcov --capture --directory build --output-file coverage.info
-  after_scripts:
+  after_script:
     - bash <(curl -Ls https://coverage.codacy.com/get.sh) coverage.info
     - genhtml coverage.info --output-directory out
 
