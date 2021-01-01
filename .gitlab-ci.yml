@@ -1,4 +1,8 @@
 ---
+default:
+  image: ${CI_REGISTRY_IMAGE}
+  interruptible: true
+
 stages:
   - environment
   - build
