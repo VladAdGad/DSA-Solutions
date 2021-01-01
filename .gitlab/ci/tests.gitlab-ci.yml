@@ -1,6 +1,5 @@
 tests:
   stage: tests
-  image: ${CI_REGISTRY_IMAGE}
   script:
     - build/bin/leetcode-solutions-tests --reporter=junit --out=${CI_JOB_NAME}-report.xml
   artifacts:

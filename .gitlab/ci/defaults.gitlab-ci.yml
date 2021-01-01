@@ -1,4 +1,4 @@
-.cache_ccache:
+.cache-ccache:
   before_script:
     - ccache --set-config=cache_dir=$(pwd)/.ccache
   cache:

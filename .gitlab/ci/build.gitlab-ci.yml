@@ -1,6 +1,6 @@
 build:
   stage: build
-  extends: .cache_ccache
+  extends: .cache-ccache
   script:
     - environment/clean_build_project.sh
   artifacts:

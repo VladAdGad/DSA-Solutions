@@ -1,6 +1,7 @@
 clang-tidy:
   stage: quality gates
-  extends: .cache_ccache
+  extends: .cache-ccache
+  dependencies: [ ]
   variables:
     CODACY_URL: https://api.codacy.com
     CODACY_CLANG_TIDY_VERSION: 1.2.1
@@ -10,17 +11,17 @@ clang-tidy:
     - chmod +x codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
   script:
     - run-clang-tidy -p=build | ./.gitlab/scripts/codacy_send_results.sh
-  dependencies: [ ]
 
 clang-format:
   stage: quality gates
+  dependencies: [ ]
   script:
     - find . -name '*.cpp' | xargs clang-format --dry-run --verbose
-  dependencies: [ ]
 
 lcov:
   stage: quality gates
-  extends: .cache_ccache
+  extends: .cache-ccache
+  dependencies: [ ]
   before_script:
     - export CXXFLAGS="-g -O0 --coverage"
     - environment/clean_build_project.sh
@@ -33,8 +34,7 @@ lcov:
   artifacts:
     name: ${CI_JOB_NAME}
     paths:
-      - ${CI_JOB_NAME}-output
-  dependencies: [ ]
+    - ${CI_JOB_NAME}-output
 
 valgrind:
   stage: quality gates
