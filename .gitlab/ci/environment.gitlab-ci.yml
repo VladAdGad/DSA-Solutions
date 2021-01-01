@@ -15,4 +15,3 @@ prepare-environment:
     - docker build --tag=${CI_REGISTRY_IMAGE} --cache-from=${CI_REGISTRY_IMAGE} .
     - docker push "${CI_REGISTRY_IMAGE}"
   interruptible: true
-  dependencies: [ ]

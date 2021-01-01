@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -eu
 
-echo ${CODACY_CLANG_TIDY_VERSION}
-echo ${CODACY_PROJECT_TOKEN}
-echo ${CODACY_URL}
-echo ${CI_COMMIT_SHA}
-
 ./codacy-clang-tidy-"${CODACY_CLANG_TIDY_VERSION}" |
   curl -XPOST --location --header "project-token: ${CODACY_PROJECT_TOKEN}" \
     --header "Content-type: application/json" -d @- \
