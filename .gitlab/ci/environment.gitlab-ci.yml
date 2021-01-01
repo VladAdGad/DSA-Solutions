@@ -8,9 +8,9 @@ prepare-environment:
     DOCKER_TLS_CERTDIR: ""
   before_script:
     - apk update
-    - echo "${CI_REGISTRY_PASSWORD}" | docker login --username "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
+    - echo ${CI_REGISTRY_PASSWORD} | docker login --username ${CI_REGISTRY_USER} ${CI_REGISTRY} --password-stdin
   script:
-    - docker pull "${CI_REGISTRY_IMAGE}" || true
+    - docker pull ${CI_REGISTRY_IMAGE} || true
     - cd environment
     - docker build --tag=${CI_REGISTRY_IMAGE} --cache-from=${CI_REGISTRY_IMAGE} .
     - docker push "${CI_REGISTRY_IMAGE}"
