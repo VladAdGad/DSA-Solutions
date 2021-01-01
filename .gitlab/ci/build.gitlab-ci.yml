@@ -1,9 +1,9 @@
 build:
   stage: build
-  image: ${CI_REGISTRY_IMAGE}
+  extends: .cache-ccache
   script:
     - environment/clean_build_project.sh
   artifacts:
+    name: leetcode-solutions-tests
     paths:
       - build/bin/leetcode-solutions-tests
-  interruptible: true
