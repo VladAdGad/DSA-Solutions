@@ -10,7 +10,7 @@ stages:
   - tests
 
 include:
-  - local: .gitlab-ci/defaults.gitlab-ci.yml
+  - local: .gitlab/ci/defaults.gitlab-ci.yml
 
   - local: .gitlab/ci/environment.gitlab-ci.yml
   - local: .gitlab/ci/build.gitlab-ci.yml
