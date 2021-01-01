@@ -3,7 +3,7 @@
   image: ${CI_REGISTRY_IMAGE}
   interruptible: true
 
-codacy-clang-tidy:
+clang-tidy:
   <<: *lint_definition
   variables:
     CODACY_URL: https://api.codacy.com
@@ -14,15 +14,21 @@ codacy-clang-tidy:
     - chmod +x codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION}
     - run-clang-tidy -p=build | ./.gitlab/scripts/codacy_send_results.sh
 
+lcov:
+  <<: *lint_definition
+  scripts:
+    - export CXXFLAGS="-g -O0 --coverage"
+    - environment/clean_build_project.sh
+    - build/bin/leetcode-solutions
+    - lcov --capture --directory build --output-file coverage.info
+  after_scripts:
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) coverage.info
+    - genhtml coverage.info --output-directory out
+
 clang-format:
   <<: *lint_definition
   script:
     - find . -name '*.hpp' -or -name '*.cpp' | xargs clang-format --dry-run --verbose
-
-cppcheck:
-  <<: *lint_definition
-  script:
-    - cppcheck --force --enable=all .
 
 valgrind:
   <<: *lint_definition
