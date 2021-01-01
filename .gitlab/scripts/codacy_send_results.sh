@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -eux
+set -eu
 
-./codacy-clang-tidy-${CODACY_CLANG_TIDY_VERSION} |
-  curl -XPOST -L -H "project-token: ${CODACY_PROJECT_TOKEN}" \
-    -H "Content-type: application/json" -d @- \
-    "https://api.codacy.com/2.0/commit/${CI_COMMIT_REF_NAME}/issuesRemoteResults"
+./codacy-clang-tidy-"${CODACY_CLANG_TIDY_VERSION}" |
+  curl -XPOST --location --header "project-token: ${CODACY_PROJECT_TOKEN}" \
+    --header "Content-type: application/json" --data-raw @- \
+    "https://api.codacy.com/2.0/commit/${CI_COMMIT_SHA}/issuesRemoteResults"
 
-curl -XPOST -L -H "project-token: ${CODACY_PROJECT_TOKEN}" \
-  -H "Content-type: application/json" \
-  "https://api.codacy.com/2.0/commit/${CI_COMMIT_REF_NAME}/resultsFinal"
+curl -XPOST --location ---header "project-token: ${CODACY_PROJECT_TOKEN}" \
+  --header "Content-type: application/json" \
+  "https://api.codacy.com/2.0/commit/${CI_COMMIT_SHA}/resultsFinal"
